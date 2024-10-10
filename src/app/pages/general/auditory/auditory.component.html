@@ -1,0 +1,79 @@
+<body class="flex-container">
+    <app-sidebar></app-sidebar>
+
+    <h1 class="title">Auditoría</h1>
+
+    <div class="container">
+        <div class="audit-container">
+            <div class="filter-section">
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha Inicio</mat-label>
+                    <input matInput [matDatepicker]="startPicker">
+                    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startPicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha Fin</mat-label>
+                    <input matInput [matDatepicker]="endPicker">
+                    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endPicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Entidad</mat-label>
+                    <mat-select>
+                        <mat-option value="">Seleccionar Entidad</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Operación</mat-label>
+                    <mat-select>
+                        <mat-option value="">Seleccionar Operación</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Usuario</mat-label>
+                    <mat-select>
+                        <mat-option value="">Seleccionar Usuario</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-icon-button aria-label="Buscar">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="entity">
+                    <mat-header-cell *matHeaderCellDef> Entidad </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.entity}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="userId">
+                    <mat-header-cell *matHeaderCellDef> Usuario </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.userId}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="operation">
+                    <mat-header-cell *matHeaderCellDef> Operación </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.operation}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dateTime">
+                    <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dateTime}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            
+                
+            </mat-table>
+            <mat-paginator [pageSize]="8" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+</body>

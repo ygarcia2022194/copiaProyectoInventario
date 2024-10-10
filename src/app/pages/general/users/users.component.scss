@@ -1,0 +1,123 @@
+@import '/src/styles.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+
+  .title {
+      font-size: 2rem;
+      color: #333;
+      margin: 20px 0;
+  }
+
+  .container {
+      display: flex;
+      width: 90%;
+      max-width: 1200px;
+      flex-grow: 1;
+      gap: 20px;
+
+      .left-section {
+          flex: 0 0 25%; 
+          padding: 20px;
+          background-color: $secondary-color;
+          border-right: 1px solid #ddd;
+          max-width: 350px; 
+
+          .input-group {
+              margin-bottom: 15px;
+          }
+
+          table {
+              width: 100%; 
+              border-collapse: collapse;
+
+              th, td {
+                  padding: 10px;
+                  text-align: left;
+                  border-bottom: 1px solid #ddd;
+              }
+          }
+      }
+
+      .right-section {
+          flex: 1; 
+          padding: 20px;
+          background-color: $secondary-color;
+          display: flex;
+          flex-direction: column;
+
+          h1 {
+              font-size: 1.5rem;
+              color: #333;
+              margin-bottom: 20px;
+              text-align: center;
+          }
+
+          .input-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr); 
+              gap: 20px; 
+
+              .input-group {
+                  display: flex;
+                  flex-direction: column;
+
+                  label {
+                      font-size: 0.9rem;
+                      color: #333;
+                      margin-bottom: 5px;
+                  }
+
+                  input,
+                  select {
+                      width: 100%;
+                      padding: 10px;
+                      font-size: 0.9rem;
+                      border: 1px solid #ccc;
+                      border-radius: 4px;
+                      background-color: #fff;
+                  }
+              }
+          }
+
+          
+          .btn-container {
+              display: flex;
+              justify-content: flex-start; 
+              margin-top: 20px;
+          }
+
+          .btn-submit {
+              background-color: $blue-color;
+              color: #fff;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 4px;
+              font-size: 1rem;
+              cursor: pointer;
+
+              &:hover {
+                background-color: darken($blue-color, 10%);
+              }
+          }
+      }
+  }
+  .snackbar-success {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .snackbar-error {
+    background-color: #f44336; 
+    color: white;
+  }
+}
