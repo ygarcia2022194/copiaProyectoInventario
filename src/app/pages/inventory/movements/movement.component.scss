@@ -1,0 +1,69 @@
+@import '/src/styles.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-left: 60px;
+    background: #e4f3ff;
+    position: relative;
+
+    .title {
+        position: absolute;
+        top: 35px;
+        transform: translate(-50%, -50%);
+        font-size: 1.3rem;
+        color: $blue-color;
+        z-index: 10;
+    }
+
+    .container {
+        display: flex;
+        width: 100%;
+        height: 80%;
+        z-index: 1;
+    }
+
+    .audit-container {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+    }
+}
+
+.confirm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-submit {
+    background-color: $blue-color;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+        background-color: $secondary-color;
+        color: #000000;
+    }
+}
+
+.btn-success, .btn-danger {
+    padding: 5px;
+    margin: 5px;
+}

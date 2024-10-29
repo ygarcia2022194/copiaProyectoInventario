@@ -16,7 +16,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,15 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  currentLanguage: string;
+
   constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('es');
+    const saveLanguage = localStorage.getItem('appLanguage');
+
+    this.currentLanguage = saveLanguage ? saveLanguage : 'es';
+
+    this.translate.setDefaultLang(this.currentLanguage);
+    localStorage.setItem('appLanguage', this.currentLanguage);
   }
 }
+

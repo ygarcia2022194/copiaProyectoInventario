@@ -1,0 +1,133 @@
+<body class="flex-container">
+    <app-sidebar></app-sidebar>
+
+    <h1 class="title">{{ 'MOVEMENT.TITLE' | translate }}</h1>
+
+    <div class="container">
+        <div class="audit-container">
+            <mat-tab-group>
+                <mat-tab label="Movimientos en espera" (click)="loadMovements()">
+                    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                        <ng-container matColumnDef="nameProduct">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.PRODUCT' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.nameProduct }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nameWinery">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.WINERY' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.nameWinery }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nameUser">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.USER' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.nameUser }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="quantity">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.QUANTITY' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.quantity }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="totalPrice">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.TOTAL_PRICE' | translate
+                                }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.totalPrice | currency }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="operationType">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.OPERATION_TYPE' | translate
+                                }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.operationType }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dateMovement">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.DATE' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.dateMovement | date: 'medium' }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.ACTION' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="confirm">
+                                <div *ngIf="!showConfirmCancelButtons[element.movementId]">
+                                    <button class="btn-submit" (click)="confirmEntry(element.movementId)">{{
+                                        'MOVEMENT.CONFIRM' | translate }}</button>
+                                </div>
+                                <div *ngIf="showConfirmCancelButtons[element.movementId]">
+                                    <button type="button" class="btn btn-success"
+                                        (click)="onConfirm(element.movementId)">
+                                        <i class="bi bi-check-circle"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger"
+                                        (click)="onCancel(element.movementId)">
+                                        <i class="bi bi-x-circle"></i>
+                                    </button>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+
+                    <mat-paginator [length]="totalElementsMovements" [pageSize]="pageSize" [hidePageSize]="true"
+                        (page)="handlePageChange($event)">
+                    </mat-paginator>
+                </mat-tab>
+
+                <mat-tab label="Movimientos recibidos" (click)="loadMovementsHistory()">
+                    <mat-table [dataSource]="historySource" class="mat-elevation-z8">
+                        <ng-container matColumnDef="movementId">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.ID' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.movementId }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nameProduct">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.PRODUCT' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.nameProduct }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nameWinery">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.WINERY' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.nameWinery }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nameUser">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.USER' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.nameUser }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="quantity">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.QUANTITY' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.quantity }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="totalPrice">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.TOTAL_PRICE' | translate
+                                }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.totalPrice | currency }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="operationType">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.OPERATION_TYPE' | translate
+                                }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.operationType }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dateMovement">
+                            <mat-header-cell *matHeaderCellDef>{{ 'MOVEMENT.DATE' | translate }}</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.dateMovement | date: 'medium' }} </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumnsHistory"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumnsHistory;"></mat-row>
+                    </mat-table>
+
+                    <mat-paginator [length]="totalElementsHistory" [pageSize]="pageSize" [hidePageSize]="true"
+                        (page)="handlePageChange($event)">
+                    </mat-paginator>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</body>

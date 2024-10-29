@@ -21,6 +21,7 @@ mat-list {
         display: flex;
         justify-content: space-between;  
         width: 100%;  
+        align-items: center;
 
         .items {
             display: flex;
@@ -42,7 +43,7 @@ mat-list {
     display: flex;
     align-items: center;
 
-    &.email {
+    &.email, &.datePurchase, &.totalPurchase {
         color: #757575; 
         font-size: 0.7em; 
     }
@@ -53,6 +54,7 @@ mat-list {
     height: 10px;
     border-radius: 50%;
     display: center;
+    margin-right: 10px;
 
     &.active {
         background-color: $state-color-active; 

@@ -3,7 +3,6 @@ import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA} from '@angular/material
 import {MatButtonModule} from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core'; 
 
-
 /**
  * @title 
  */
@@ -15,11 +14,11 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [MatDialogModule, MatButtonModule, TranslateModule],
 })
 export class DeleteDialogComponent {
-  itemType: 'user' | 'profile';
+  itemType: 'users' | 'profiles' | 'categories';
 
   constructor(
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { item: any; type: 'user' | 'profile' }
+    @Inject(MAT_DIALOG_DATA) public data: { item: any; type: 'users' | 'profiles' | 'categories' }
   ) {
     this.itemType = data.type;
   }
